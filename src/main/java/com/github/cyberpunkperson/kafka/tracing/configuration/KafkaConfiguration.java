@@ -63,7 +63,7 @@ class KafkaConfiguration {
 
     @Bean
     ConsumerFactory<String, byte[]> marvelConsumerFactory() {
-        KafkaProperties properties = dcKafkaProperties();
+        KafkaProperties properties = marvelKafkaProperties();
         KafkaConsumer consumer = properties.getConsumer();
         Map<String, Object> configuration = new HashMap<>(consumer.getProperties());
         configuration.put(BOOTSTRAP_SERVERS_CONFIG, properties.getUrl());
