@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: kafka-tracing
+  main:
+    banner-mode: "off"
+  sleuth:
+    trace-id128: true
+    messaging:
+      kafka:
+        enabled: true
+    integration:
+      enabled: true
+    async:
+      enabled: false
+
+logging:
+  level:
+    root: info
+    com.github.cyberpunkperson.kafka.tracing: debug
+    org.springframework.cloud.sleuth: debug
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X] %logger{80} %msg%n'
+
+kafka:
+  default:
+    url: localhost:29092
+    consumer:
+      group-id: ${spring.application.name}
+    producer:
+      acks: all
+  sources:
+    dc:
+      url: ${kafka.default.url}
+      consumer:
+        group-id: ${kafka.default.consumer.group-id}
+        properties:
+          auto.offset.reset: latest
+    marvel:
+      url: ${kafka.default.url}
+      consumer:
+        group-id: ${kafka.default.consumer.group-id}
+        properties:
+          auto.offset.reset: latest
+  topic:
+    dc: dc-news
+    marvel: marvel-news
+    news-target: news-target

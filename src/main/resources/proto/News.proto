@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package src.main.java.com.github.cyberpunkperson.tracing.target.kafka.event;
+
+message NewsEvent {
+
+  bytes id = 1;
+
+  bytes hero_id = 2;
+
+  Action action = 3;
+
+  string hero_name = 5;
+
+  string description = 6;
+
+  string  entity_idempotency_key = 7;
+
+  enum Action {
+    FEAT = 0;
+    FUCK_UP = 1;
+  }
+}
